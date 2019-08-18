@@ -21,7 +21,7 @@ const App: React.FC = () => {
 
 
                     <Route path="/" exact component={Moro}/>
-                    <Route path="/hello/" component={Hello}/>
+                    <Route path="/hello/" render={() => <Hello name={'Teppo'}/>}/>
                 </div>
             </Router>
         </div>
