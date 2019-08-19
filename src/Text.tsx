@@ -1,20 +1,31 @@
 import * as React from 'react';
+import * as _ from 'lodash';
+
+const split = (raw: string): string[] =>
+    _.sortedUniq(_.sortBy(_.split(raw, '\n').map(_.trim).filter(i => !_.isEmpty(i))));
 
 interface Props {
 }
 
 interface State {
-    text: string
+    rawText: string,
+    items: string[]
 }
 
 class Text extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
-        this.state = {text: ''};
+        this.state = {
+            rawText: '',
+            items: []
+        };
     }
 
-    handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({text: event.target.value});
+    handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+        this.setState({
+            rawText: event.target.value,
+            items: split(event.target.value)
+        });
     };
 
     render() {
@@ -23,12 +34,14 @@ class Text extends React.Component<Props, State> {
                 <form>
                     <label>
                         Write your options here:
-                        <input type='text' value={this.state.text} onChange={this.handleChange}/>
+                        <textarea value={this.state.rawText} onChange={this.handleChange}/>
                     </label>
                 </form>
-                <div>
-                    {this.state.text}
-                </div>
+                <ul>
+                    {
+                        this.state.items.map(item => <li key={item}>{item}</li>)
+                    }
+                </ul>
             </div>
         );
     }
