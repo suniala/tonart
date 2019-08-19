@@ -1,10 +1,15 @@
 import * as React from 'react';
 import * as _ from 'lodash';
+import {decodeState, encodeState} from "./persistedState";
+import ItemList from "./ItemList";
 
 const split = (raw: string): string[] =>
     _.sortedUniq(_.sortBy(_.split(raw, '\n').map(_.trim).filter(i => !_.isEmpty(i))));
 
+const itemsToRawText = (items: string[]) => items.join('\n');
+
 interface Props {
+    encodedState: string
 }
 
 interface State {
@@ -15,10 +20,19 @@ interface State {
 class Text extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
-        this.state = {
-            rawText: '',
-            items: []
-        };
+        if (this.props.encodedState) {
+            let decoded = decodeState(this.props.encodedState);
+            this.state = {
+                rawText: itemsToRawText(decoded.items),
+                items: decoded.items
+            }
+
+        } else {
+            this.state = {
+                rawText: '',
+                items: []
+            };
+        }
     }
 
     handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -26,6 +40,11 @@ class Text extends React.Component<Props, State> {
             rawText: event.target.value,
             items: split(event.target.value)
         });
+    };
+
+    handleSubmit = () => {
+        let encodedState = encodeState({items: this.state.items});
+        window.location.assign('/arpa/' + encodedState);
     };
 
     render() {
@@ -37,11 +56,8 @@ class Text extends React.Component<Props, State> {
                         <textarea value={this.state.rawText} onChange={this.handleChange}/>
                     </label>
                 </form>
-                <ul>
-                    {
-                        this.state.items.map(item => <li key={item}>{item}</li>)
-                    }
-                </ul>
+                <ItemList items={this.state.items}/>
+                <button onClick={this.handleSubmit}>Valmis!</button>
             </div>
         );
     }

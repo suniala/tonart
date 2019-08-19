@@ -4,6 +4,7 @@ import {RouteComponentProps} from 'react-router';
 import Moro from "./Moi";
 import Hello from "./Hello";
 import Text from "./Text";
+import Arpa from "./Arpa";
 
 const App: React.FC = () => {
     return (
@@ -13,18 +14,17 @@ const App: React.FC = () => {
                     <nav>
                         <ul>
                             <li>
-                                <Link to="/">Arpa</Link>
-                            </li>
-                            <li>
-                                <Link to="/moro">Moro</Link>
-                            </li>
-                            <li>
-                                <Link to="/hello/Teppo">Hello</Link>
+                                <Link to="/muokkaus">Uusi</Link>
                             </li>
                         </ul>
                     </nav>
 
-                    <Route path="/" exact component={Text}/>
+                    <Route path="/" exact component={Arpa}/>
+                    <Route path="/arpa/:encodedState" render={(props: RouteComponentProps<{ encodedState: string }>) =>
+                        <Arpa encodedState={props.match.params.encodedState}/>}/>
+                    <Route path="/muokkaus/:encodedState" exact render={(props: RouteComponentProps<{ encodedState: string }>) =>
+                        <Text encodedState={props.match.params.encodedState}/>}/>
+                    <Route path="/muokkaus" exact component={Text}/>
                     <Route path="/moro" exact component={Moro}/>
                     <Route path="/hello/:name" render={(props: RouteComponentProps<{ name: string }>) =>
                         <Hello name={props.match.params.name}/>}/>
