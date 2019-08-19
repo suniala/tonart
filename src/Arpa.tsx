@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {decodeState} from "./persistedState";
 import ItemList from "./ItemList";
+import {Link} from "react-router-dom";
 
 interface Props {
     encodedState: string
@@ -37,6 +38,7 @@ class Arpa extends React.Component<Props, State> {
                         ? <button onClick={this.handleEdit}>Uusi</button>
                         : <button onClick={this.handleEdit}>Muokkaa</button>
                 }
+                <Link to={'/pelaa/' + this.props.encodedState}>Pelaa</Link>
             </div>
         );
     }
