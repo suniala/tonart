@@ -1,7 +1,8 @@
 import * as React from 'react';
 import {decodeState} from "./persistedState";
 import ItemList from "./ItemList";
-import {Link} from "react-router-dom";
+import {Link, RouteComponentProps} from "react-router-dom";
+import RouterButton from "./RouterButton";
 
 interface Props {
     encodedState: string
@@ -25,8 +26,8 @@ class Arpa extends React.Component<Props, State> {
         }
     }
 
-    handleEdit = () => {
-        window.location.assign('/muokkaus/' + (this.props.encodedState ? this.props.encodedState : ''));
+    handleEdit = (r: RouteComponentProps) => {
+        r.history.push('/muokkaus/' + (this.props.encodedState ? this.props.encodedState : ''));
     };
 
     render() {
@@ -35,8 +36,8 @@ class Arpa extends React.Component<Props, State> {
                 <ItemList items={this.state.items}/>
                 {
                     !this.props.encodedState
-                        ? <button onClick={this.handleEdit}>Uusi</button>
-                        : <button onClick={this.handleEdit}>Muokkaa</button>
+                        ? <RouterButton onClick={this.handleEdit}>Uusi</RouterButton>
+                        : <RouterButton onClick={this.handleEdit}>Muokkaa</RouterButton>
                 }
                 <Link to={'/pelaa/' + this.props.encodedState}>Pelaa</Link>
             </div>

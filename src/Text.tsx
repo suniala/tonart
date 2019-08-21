@@ -2,6 +2,8 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import {decodeState, encodeState} from "./persistedState";
 import ItemList from "./ItemList";
+import {RouteComponentProps} from "react-router";
+import RouterButton from "./RouterButton";
 
 const split = (raw: string): string[] =>
     _.sortedUniq(_.sortBy(_.split(raw, '\n').map(_.trim).filter(i => !_.isEmpty(i))));
@@ -42,9 +44,9 @@ class Text extends React.Component<Props, State> {
         });
     };
 
-    handleSubmit = () => {
+    private handleSubmit = (r: RouteComponentProps) => {
         let encodedState = encodeState({items: this.state.items});
-        window.location.assign('/arpa/' + encodedState);
+        r.history.push('/arpa/'+encodedState);
     };
 
     render() {
@@ -57,7 +59,7 @@ class Text extends React.Component<Props, State> {
                     </label>
                 </form>
                 <ItemList items={this.state.items}/>
-                <button onClick={this.handleSubmit}>Valmis!</button>
+                <RouterButton onClick={this.handleSubmit}>Valmis!</RouterButton>
             </div>
         );
     }
