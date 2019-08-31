@@ -39,8 +39,10 @@ class Arpa extends React.Component<Props, State> {
                 {this.haveItems()
                     ? <div>
                         <ItemList items={this.state.items}/>
-                        <Link className='button button-primary' to={'/pelaa/' + this.props.encodedState}>Aloita
-                            arvonta</Link>
+                        <Link className='button button-primary' to={'/sarja/' + this.props.encodedState}>Arvo
+                            sarja</Link>
+                        <span> </span>
+                        <Link className='button button-primary' to={'/yksi/' + this.props.encodedState}>Arvo yksi</Link>
                         <span> </span>
                         <RouterButton onClickR={this.handleEdit}>Muokkaa</RouterButton>
                     </div>

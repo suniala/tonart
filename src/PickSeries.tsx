@@ -14,7 +14,7 @@ interface State {
     remainingItems: string[]
 }
 
-class Play extends React.Component<Props, State> {
+class PickSeries extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -44,14 +44,15 @@ class Play extends React.Component<Props, State> {
     render() {
         return (
             <div>
-                <h1>Arvo</h1>
+                <h1>Arvo sarja</h1>
                 <div>
-                    <button onClick={this.prev} disabled={this.disablePrev()}>Edellinen</button>
+                    <button onClick={this.prev} disabled={this.disablePrev()}>&lt;</button>
                     <span> {`${this.currItemNo()} / ${this.totalItemCount()}`} </span>
-                    <button onClick={this.next} disabled={this.disableNext()}>Seuraava</button>
+                    <button className='button-primary' onClick={this.next}
+                            disabled={this.disableNext()}>&gt;</button>
                 </div>
                 <pre>
-                    {_.head(this.state.remainingItems)}
+                    <code>{_.head(this.state.remainingItems)}</code>
                 </pre>
 
                 <Link to={'/arpa/' + this.props.encodedState}>Palaa</Link>
@@ -60,4 +61,4 @@ class Play extends React.Component<Props, State> {
     }
 }
 
-export default Play;
+export default PickSeries;
