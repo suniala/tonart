@@ -62,7 +62,7 @@ class Text extends React.Component<Props, State> {
                         <label htmlFor="items">Arvonnan vaihtoehdot</label>
                         <textarea className="u-full-width" placeholder="Kirjoita vaihtoehdot tähän..."
                                   onChange={this.handleChange} value={this.state.rawText}
-                                  id="items" rows={10}/>
+                                  id="items" style={{height: '10em'}}/>
                     </div>
                     <div className="row">
                         <label>Esikatselu</label>
