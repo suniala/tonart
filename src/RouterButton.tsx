@@ -1,5 +1,6 @@
 import {RouteComponentProps, withRouter} from "react-router";
 import * as React from "react";
+import * as _ from 'lodash';
 
 interface Props extends RouteComponentProps, React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
     onClickR: (r: RouteComponentProps) => void
@@ -12,7 +13,7 @@ class RouterButton extends React.Component<Props, {}> {
 
     render() {
         return (
-            <button onClick={this.handleClick} {...this.props}>
+            <button onClick={this.handleClick} {..._.omit(this.props, ['onClick', 'onClickR', 'staticContext'])}>
                 {this.props.children}
             </button>);
     }
