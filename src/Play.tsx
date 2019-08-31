@@ -37,14 +37,22 @@ class Play extends React.Component<Props, State> {
 
     disableNext = (): boolean => this.state.remainingItems.length <= 1;
 
+    currItemNo = (): number => this.state.pastItems.length + 1;
+
+    totalItemCount = (): number => this.state.pastItems.length + this.state.remainingItems.length;
+
     render() {
         return (
             <div>
                 <div>
+                    <button onClick={this.prev} disabled={this.disablePrev()}>Edellinen</button>
+                    <span>{`${this.currItemNo()} / ${this.totalItemCount()}`}</span>
+                    <button onClick={this.next} disabled={this.disableNext()}>Seuraava</button>
+                </div>
+                <div>
                     {_.head(this.state.remainingItems)}
                 </div>
-                <button onClick={this.prev} disabled={this.disablePrev()}>Edellinen</button>
-                <button onClick={this.next} disabled={this.disableNext()}>Seuraava</button>
+
                 <Link to={'/arpa/' + this.props.encodedState}>Palaa</Link>
             </div>
         );

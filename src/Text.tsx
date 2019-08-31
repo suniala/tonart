@@ -54,7 +54,7 @@ class Text extends React.Component<Props, State> {
             <div>
                 <form>
                     <label>
-                        Write your options here:
+                        Kirjoita vaihtoehdot tähän:
                         <textarea value={this.state.rawText} onChange={this.handleChange}/>
                     </label>
                 </form>
