@@ -10,7 +10,7 @@ interface Props {
 
 interface State {
     pastItems: string[]
-    nextItems: string[]
+    remainingItems: string[]
 }
 
 class Play extends React.Component<Props, State> {
@@ -18,29 +18,29 @@ class Play extends React.Component<Props, State> {
         super(props);
         this.state = {
             pastItems: [],
-            nextItems: shuffle(decodeState(this.props.encodedState).items)
+            remainingItems: shuffle(decodeState(this.props.encodedState).items)
         }
     }
 
     prev = () => this.setState((prevState) => ({
         pastItems: _.dropRight(prevState.pastItems, 1),
-        nextItems: _.concat([_.last(prevState.pastItems) as string], prevState.nextItems)
+        remainingItems: _.concat([_.last(prevState.pastItems) as string], prevState.remainingItems)
     }));
 
     next = () => this.setState((prevState) => ({
-        pastItems: _.concat(prevState.pastItems, [_.head(prevState.nextItems) as string]),
-        nextItems: _.drop(prevState.nextItems, 1)
+        pastItems: _.concat(prevState.pastItems, [_.head(prevState.remainingItems) as string]),
+        remainingItems: _.drop(prevState.remainingItems, 1)
     }));
 
     disablePrev = (): boolean => _.isEmpty(this.state.pastItems);
 
-    disableNext = (): boolean => _.isEmpty(this.state.nextItems);
+    disableNext = (): boolean => this.state.remainingItems.length <= 1;
 
     render() {
         return (
             <div>
                 <div>
-                    {_.head(this.state.nextItems)}
+                    {_.head(this.state.remainingItems)}
                 </div>
                 <button onClick={this.prev} disabled={this.disablePrev()}>Edellinen</button>
                 <button onClick={this.next} disabled={this.disableNext()}>Seuraava</button>
