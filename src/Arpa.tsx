@@ -30,16 +30,22 @@ class Arpa extends React.Component<Props, State> {
         r.history.push('/muokkaus/' + (this.props.encodedState ? this.props.encodedState : ''));
     };
 
+    private haveItems = () => this.state.items.length > 1;
+
     render() {
         return (
             <div>
-                <ItemList items={this.state.items}/>
-                {
-                    !this.props.encodedState
-                        ? <RouterButton onClick={this.handleEdit}>Uusi</RouterButton>
-                        : <RouterButton onClick={this.handleEdit}>Muokkaa</RouterButton>
+                <h1>Arvonta</h1>
+                {this.haveItems()
+                    ? <div>
+                        <ItemList items={this.state.items}/>
+                        <Link className='button button-primary' to={'/pelaa/' + this.props.encodedState}>Aloita
+                            arvonta</Link>
+                        <span> </span>
+                        <RouterButton onClickR={this.handleEdit}>Muokkaa</RouterButton>
+                    </div>
+                    : <p>Et ole vielä syöttänyt vaihtoehtoja. <Link to='/muokkaus'>Luo uusi arvonta.</Link></p>
                 }
-                <Link to={'/pelaa/' + this.props.encodedState}>Pelaa</Link>
             </div>
         );
     }

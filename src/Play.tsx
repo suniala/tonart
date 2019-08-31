@@ -44,14 +44,15 @@ class Play extends React.Component<Props, State> {
     render() {
         return (
             <div>
+                <h1>Arvo</h1>
                 <div>
                     <button onClick={this.prev} disabled={this.disablePrev()}>Edellinen</button>
-                    <span>{`${this.currItemNo()} / ${this.totalItemCount()}`}</span>
+                    <span> {`${this.currItemNo()} / ${this.totalItemCount()}`} </span>
                     <button onClick={this.next} disabled={this.disableNext()}>Seuraava</button>
                 </div>
-                <div>
+                <pre>
                     {_.head(this.state.remainingItems)}
-                </div>
+                </pre>
 
                 <Link to={'/arpa/' + this.props.encodedState}>Palaa</Link>
             </div>

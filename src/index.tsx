@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './css/skeleton/normalize.css';
+import './css/skeleton/skeleton.css';
 import './css/index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';

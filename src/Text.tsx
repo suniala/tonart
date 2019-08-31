@@ -46,20 +46,34 @@ class Text extends React.Component<Props, State> {
 
     private handleSubmit = (r: RouteComponentProps) => {
         let encodedState = encodeState({items: this.state.items});
-        r.history.push('/arpa/'+encodedState);
+        r.history.push('/arpa/' + encodedState);
     };
+
+    private disableSubmit = () => this.state.items.length < 2;
+
+    private showPreview = () => this.state.items.length > 0;
 
     render() {
         return (
             <div>
+                <h1>Muokkaa arvontaa</h1>
                 <form>
-                    <label>
-                        Kirjoita vaihtoehdot tähän:
-                        <textarea value={this.state.rawText} onChange={this.handleChange}/>
-                    </label>
+                    <div className="row">
+                        <label htmlFor="items">Arvonnan vaihtoehdot</label>
+                        <textarea className="u-full-width" placeholder="Kirjoita vaihtoehdot tähän..."
+                                  onChange={this.handleChange} value={this.state.rawText}
+                                  id="items" rows={10}/>
+                    </div>
+                    <div className="row">
+                        <label>Esikatselu</label>
+                        {this.showPreview()
+                            ? <ItemList items={this.state.items}/>
+                            : <p>Kirjoita vaihtoehtoja ensin!</p>
+                        }
+                    </div>
+                    <RouterButton className="button-primary" onClickR={this.handleSubmit}
+                                  disabled={this.disableSubmit()}>Valmis!</RouterButton>
                 </form>
-                <ItemList items={this.state.items}/>
-                <RouterButton onClick={this.handleSubmit}>Valmis!</RouterButton>
             </div>
         );
     }

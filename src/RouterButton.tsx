@@ -1,18 +1,18 @@
 import {RouteComponentProps, withRouter} from "react-router";
 import * as React from "react";
 
-interface Props extends RouteComponentProps {
-    onClick: (r: RouteComponentProps) => void
+interface Props extends RouteComponentProps, React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
+    onClickR: (r: RouteComponentProps) => void
 }
 
 class RouterButton extends React.Component<Props, {}> {
     private handleClick = () => {
-        this.props.onClick(this.props)
+        this.props.onClickR(this.props)
     };
 
     render() {
         return (
-            <button onClick={this.handleClick}>
+            <button onClick={this.handleClick} {...this.props}>
                 {this.props.children}
             </button>);
     }

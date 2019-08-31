@@ -1,5 +1,5 @@
 import React from 'react';
-import {HashRouter, Link, Route} from 'react-router-dom';
+import {HashRouter, Route} from 'react-router-dom';
 import {RouteComponentProps} from 'react-router';
 import Moro from "./Moi";
 import Hello from "./Hello";
@@ -10,16 +10,8 @@ import Play from "./Play";
 const App: React.FC = () => {
     return (
         <HashRouter>
-            <div className="App">
-                <div>
-                    <nav>
-                        <ul>
-                            <li>
-                                <Link to="/muokkaus">Uusi</Link>
-                            </li>
-                        </ul>
-                    </nav>
-
+            <div className="container">
+                <div className="row">
                     <Route path="/" exact component={Arpa}/>
                     <Route path="/arpa/:encodedState" render={(props: RouteComponentProps<{ encodedState: string }>) =>
                         <Arpa encodedState={props.match.params.encodedState}/>}/>
