@@ -20,7 +20,7 @@ class PickOne extends React.Component<Props, State> {
         super(props);
         let items = decodeState(this.props.encodedState).items;
         this.state = {
-            counter: 0,
+            counter: 1,
             remainingItems: items,
             current: pick(items)
         }
