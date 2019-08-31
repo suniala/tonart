@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {decodeState} from "./persistedState";
 import * as _ from 'lodash';
+import {Link} from "react-router-dom";
 
 const shuffle = (items: string[]): string[] => _.shuffle(items);
 
@@ -44,6 +45,7 @@ class Play extends React.Component<Props, State> {
                 </div>
                 <button onClick={this.prev} disabled={this.disablePrev()}>Edellinen</button>
                 <button onClick={this.next} disabled={this.disableNext()}>Seuraava</button>
+                <Link to={'/arpa/' + this.props.encodedState}>Palaa</Link>
             </div>
         );
     }
