@@ -51,9 +51,9 @@ class PickSeries extends React.Component<Props, State> {
                     <button className='button-primary' onClick={this.next}
                             disabled={this.disableNext()}>&gt;</button>
                 </div>
-                <pre>
-                    <code>{_.head(this.state.remainingItems)}</code>
-                </pre>
+                <div className='picked-item'>
+                    {_.head(this.state.remainingItems)}
+                </div>
 
                 <Link to={'/arpa/' + this.props.encodedState}>Palaa</Link>
             </div>

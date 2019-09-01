@@ -38,9 +38,9 @@ class PickOne extends React.Component<Props, State> {
             <div>
                 <h1>Arvo yksi</h1>
                 <button className='button-primary' onClick={this.handlePickNew}>Arvo uudestaan</button>
-                <pre>
-                    <code>{this.state.current}</code>
-                </pre>
+                <div className='picked-item'>
+                    {this.state.current}
+                </div>
                 <p>
                     {`Arvottu ${this.state.counter} kertaa.`}
                 </p>
