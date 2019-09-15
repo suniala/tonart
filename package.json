@@ -2,7 +2,7 @@
   "name": "arpa",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://kosmik.kapsi.fi/arpa",
+  "homepage": "https://kosmik.kapsi.fi/tahti",
   "dependencies": {
     "@types/jest": "24.0.17",
     "@types/lodash": "^4.14.137",
