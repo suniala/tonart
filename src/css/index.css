@@ -2,3 +2,13 @@ body {
     font-family: Consolas, 'Courier New', monospace;
     padding-top: 1em;
 }
+
+div.beat-count {
+    padding-top: 0.5em;
+}
+
+button.tap {
+    width: 100%;
+    font-size: 2em;
+    height: 76px;
+}

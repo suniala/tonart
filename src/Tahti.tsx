@@ -41,7 +41,7 @@ class Tahti extends React.Component<{}, State> {
 
     private handleTap = () => {
         this.setState((prev) => {
-            const count = _.isEmpty(prev.beatQueue) ? 1 : (_.last(prev.beatQueue) as Beat).count + 1;
+            const count = _.isEmpty(prev.beatQueue) ? 1 : (_.head(prev.beatQueue) as Beat).count + 1;
             let beatQueue = _.concat([{count: count, ts: new Date()}], prev.beatQueue);
             return {
                 beatQueue: beatQueue,
@@ -63,12 +63,6 @@ class Tahti extends React.Component<{}, State> {
         return (
             <div>
                 <h1>Tahti</h1>
-                <div>
-                    {_.isEmpty(this.state.beatQueue)
-                        ? <p>No beats yet.</p>
-                        : <p>{`Now at beat ${this.state.beatQueue.length}.`}</p>
-                    }
-                </div>
                 <table className="u-full-width">
                     <thead>
                     <tr>
@@ -85,10 +79,18 @@ class Tahti extends React.Component<{}, State> {
                     </tbody>
                 </table>
                 <div>
-                    <button className="button-primary" onClick={this.handleTap}>Tap</button>
+                    <div className='u-pull-right'>
+                        <button onClick={this.handleReset}>Reset</button>
+                    </div>
+                    <div className='beat-count'>
+                        {_.isEmpty(this.state.beatQueue)
+                            ? <p>No beats yet.</p>
+                            : <p>{`Now at beat ${(_.head(this.state.beatQueue) as Beat).count}.`}</p>
+                        }
+                    </div>
                 </div>
                 <div>
-                    <button onClick={this.handleReset}>Reset</button>
+                    <button className="button-primary tap" onClick={this.handleTap}>Tap</button>
                 </div>
             </div>
         );
