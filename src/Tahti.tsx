@@ -2,9 +2,6 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import Bpm from "./Bpm";
 
-interface Props {
-}
-
 interface Beat {
     count: number
     ts: Date
@@ -33,8 +30,8 @@ const countBpm = (beatQueue: Beat[], beats: number): number | undefined => {
     }
 };
 
-class Tahti extends React.Component<Props, State> {
-    constructor(props: Props) {
+class Tahti extends React.Component<{}, State> {
+    constructor(props: {}) {
         super(props);
         this.state = {
             beatQueue: [],
@@ -42,7 +39,7 @@ class Tahti extends React.Component<Props, State> {
         };
     }
 
-    private handleNaputa = () => {
+    private handleTap = () => {
         this.setState((prev) => {
             const count = _.isEmpty(prev.beatQueue) ? 1 : (_.last(prev.beatQueue) as Beat).count + 1;
             let beatQueue = _.concat([{count: count, ts: new Date()}], prev.beatQueue);
@@ -59,20 +56,39 @@ class Tahti extends React.Component<Props, State> {
         });
     };
 
+    // noinspection JSUnusedLocalSymbols
+    private handleReset = () => this.setState((prev) => ({beatQueue: [], beatCountBpms: {}}));
+
     render() {
         return (
             <div>
                 <h1>Tahti</h1>
-                <ul>
-                    <li>{this.state.beatQueue.length}</li>
+                <div>
+                    {_.isEmpty(this.state.beatQueue)
+                        ? <p>No beats yet.</p>
+                        : <p>{`Now at beat ${this.state.beatQueue.length}.`}</p>
+                    }
+                </div>
+                <table className="u-full-width">
+                    <thead>
+                    <tr>
+                        <th>Number of beats</th>
+                        <th>Average bpm</th>
+                    </tr>
+                    </thead>
+                    <tbody>
                     <Bpm count={1} bpm={this.state.beatCountBpms.one}/>
                     <Bpm count={2} bpm={this.state.beatCountBpms.two}/>
                     <Bpm count={4} bpm={this.state.beatCountBpms.four}/>
                     <Bpm count={8} bpm={this.state.beatCountBpms.eight}/>
                     <Bpm count={16} bpm={this.state.beatCountBpms.sixteen}/>
-                </ul>
+                    </tbody>
+                </table>
                 <div>
-                    <button onClick={this.handleNaputa}>Naputa</button>
+                    <button className="button-primary" onClick={this.handleTap}>Tap</button>
+                </div>
+                <div>
+                    <button onClick={this.handleReset}>Reset</button>
                 </div>
             </div>
         );

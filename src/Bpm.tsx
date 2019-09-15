@@ -10,10 +10,10 @@ interface Props {
 class Bpm extends React.Component<Props, {}> {
     render() {
         return (
-            <div>
-                <span>{this.props.count}: </span>
-                <span>{this.props.bpm ? format.format(this.props.bpm) : '-'}</span>
-            </div>
+            <tr>
+                <td>{this.props.count}</td>
+                <td>{this.props.bpm ? format.format(this.props.bpm) : '-----'}</td>
+            </tr>
         );
     }
 }
