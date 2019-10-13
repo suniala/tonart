@@ -1,11 +1,11 @@
 import React from 'react';
-import Tahti from "./Tahti";
+import Tonart from "./Tonart";
 
 const App: React.FC = () => {
     return (
         <div className="container">
             <div className="row">
-                <Tahti/>
+                <Tonart/>
             </div>
         </div>
     );

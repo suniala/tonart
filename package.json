@@ -1,8 +1,8 @@
 {
-  "name": "arpa",
+  "name": "tonart",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://kosmik.kapsi.fi/tahti",
+  "homepage": "https://kosmik.kapsi.fi/tonart",
   "dependencies": {
     "@types/jest": "24.0.17",
     "@types/lodash": "^4.14.137",
