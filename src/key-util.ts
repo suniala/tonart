@@ -6,51 +6,50 @@ export interface KeySignature {
     tones: Tone[]
 }
 
+export interface Interval {
+    semitones: number
+}
+
+const HALF: Interval = {semitones: 1};
+const FULL: Interval = {semitones: 2};
+
 interface Scale {
     name: string
-    intervals: number[]
+    intervals: Interval[]
 }
 
 const scales: Scale[] = [
     {
         name: 'Diatonic Major',
-        intervals: [2, 2, 1, 2, 2, 2, 1]
+        intervals: [FULL, FULL, HALF, FULL, FULL, FULL, HALF]
     },
     {
         name: 'Diatonic Minor',
-        intervals: [2, 1, 2, 2, 1, 2, 2]
+        intervals: [FULL, HALF, FULL, FULL, HALF, FULL, FULL]
     }
 ];
 
-// TODO: generate key signatures
-// const toneLookup = ALL_TONES.concat(ALL_TONES);
-//
-// const selectTones = (root: Tone, scale: Scale) => {
-//     return [];
-// };
-//
-// const generate: () => KeySignature[] = () =>
-//     scales.flatMap(scale =>
-//             ALL_TONES.map(root => {
-//                 return {
-//                     name: root + ' ' + scale.name,
-//                     tones: selectTones(root, scale)
-//                 }
-//             })
-//     );
-//
-// const keySignatures: KeySignature[] = generate();
+const toneLookup = ALL_TONES.concat(ALL_TONES);
 
-const keySignatures: KeySignature[] = [
-    {
-        name: 'C major',
-        tones: [Tone.C, Tone.D, Tone.E, Tone.F, Tone.G, Tone.A, Tone.B]
-    },
-    {
-        name: 'C minor',
-        tones: [Tone.C, Tone.D, Tone.Ds, Tone.F, Tone.G, Tone.Gs, Tone.As]
-    }
-];
+const selectTones = (root: Tone, scale: Scale) => {
+    let rootIndex = toneLookup.indexOf(root);
+    let toneIndices: number[] = scale.intervals.reduce(
+        (acc, curr) =>  _.concat(acc, (_.last(acc) as number) + curr.semitones),
+        [rootIndex]);
+    return toneLookup.filter((tone, index) => toneIndices.includes(index));
+};
+
+const generate: () => KeySignature[] = () =>
+    scales.flatMap(scale =>
+        ALL_TONES.map(root => {
+            return {
+                name: root + ' ' + scale.name,
+                tones: selectTones(root, scale)
+            }
+        })
+    );
+
+const keySignatures: KeySignature[] = generate();
 
 const findKeySignatures = (tones: Set<Tone>): KeySignature[] => {
     return keySignatures.filter(keySignature => {
@@ -59,5 +58,7 @@ const findKeySignatures = (tones: Set<Tone>): KeySignature[] => {
 };
 
 export {
-    findKeySignatures
+    findKeySignatures,
+    HALF,
+    FULL
 }
