@@ -3,12 +3,31 @@ body {
     padding-top: 1em;
 }
 
-div.beat-count {
-    padding-top: 0.5em;
+.keys.black {
+    margin-left: 8%;
 }
 
-button.tap {
+div.key {
+    display: inline-block;
+    margin-right: 4px;
+}
+
+.keys.black > .key {
+    width: 14%;
+}
+
+.filler {
+    display: inline-block;
+    width: 13%;
+    margin-right: 4px;
+}
+
+.keys.white > .key {
+    width: 13%;
+}
+
+.key > button {
+    padding-left: 0;
+    padding-right: 0;
     width: 100%;
-    font-size: 2em;
-    height: 76px;
 }

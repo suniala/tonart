@@ -14,7 +14,7 @@ class Key extends React.Component<Props, {}> {
 
     render() {
         return (
-            <div>
+            <div className={'key'}>
                 <button
                     className={(this.props.selected.has(this.props.tone) ? 'button-primary' : '')}
                     onClick={this.handleClick}>
