@@ -34,7 +34,7 @@ const toneLookup = ALL_TONES.concat(ALL_TONES);
 const selectTones = (root: Tone, scale: Scale) => {
     let rootIndex = toneLookup.indexOf(root);
     let toneIndices: number[] = scale.intervals.reduce(
-        (acc, curr) =>  _.concat(acc, (_.last(acc) as number) + curr.semitones),
+        (acc, curr) => _.concat(acc, (_.last(acc) as number) + curr.semitones),
         [rootIndex]);
     return toneLookup.filter((tone, index) => toneIndices.includes(index));
 };
@@ -52,9 +52,13 @@ const generate: () => KeySignature[] = () =>
 const keySignatures: KeySignature[] = generate();
 
 const findKeySignatures = (tones: Set<Tone>): KeySignature[] => {
-    return keySignatures.filter(keySignature => {
-        return _.every(Array.from(tones.values()), tone => _.indexOf(keySignature.tones, tone) >= 0);
-    });
+    if (tones.size > 0) {
+        return keySignatures.filter(keySignature => {
+            return _.every(Array.from(tones.values()), tone => _.indexOf(keySignature.tones, tone) >= 0);
+        });
+    } else {
+        return [];
+    }
 };
 
 export {

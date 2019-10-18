@@ -12,13 +12,21 @@ class Alternatives extends React.Component<Props, {}> {
 
         return (
             <div>
-                <ul>
-                    {keySignatures.map(keySignature =>
-                        <li>
-                            {keySignature.name}
-                        </li>
-                    )}
-                </ul>
+                <h2>Key signature alternatives</h2>
+                {
+                    this.props.tones.size === 0
+                        ? <p>Please push some keys first!</p>
+                        : (
+                            keySignatures.length === 0
+                                ? <p>No key signatures found.</p>
+                                : <ul>
+                                    {keySignatures.map(keySignature =>
+                                        <li>
+                                            {keySignature.name}
+                                        </li>
+                                    )}
+                                </ul>)
+                }
             </div>
         );
     }
