@@ -12,6 +12,17 @@ h2 {
     margin-left: 8%;
 }
 
+.keys.black button {
+    background-color: black;
+    border-color: black;
+    color: white;
+}
+
+.keys.black button.button-primary {
+    background-color: #33C3F0;
+    border-color: #33C3F0;
+}
+
 div.key {
     display: inline-block;
     margin-right: 4px;
