@@ -47,3 +47,24 @@ div.key {
     padding-right: 0;
     width: 100%;
 }
+
+.key-signature-panel {
+    margin-bottom: 4px;
+}
+
+.key-signature-panel .title {
+    padding: 4px;
+    font-weight: bold;
+    border: 1px solid gray;
+    background: gray;
+    color: white;
+}
+
+.key-signature-panel .tones {
+    border: 1px solid gray;
+    padding: 4px;
+}
+
+.key-signature-panel .tones.closed {
+    display: none;
+}
