@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {Tone} from "./types";
 import {findKeySignatures, KeySignature} from "./key-util";
+import KeySignaturePanel from "./KeySignaturePanel";
 
 interface Props {
     tones: Set<Tone>
@@ -19,13 +20,13 @@ class Alternatives extends React.Component<Props, {}> {
                         : (
                             keySignatures.length === 0
                                 ? <p>No key signatures found.</p>
-                                : <ul>
-                                    {keySignatures.map(keySignature =>
-                                        <li>
-                                            {keySignature.name}
-                                        </li>
-                                    )}
-                                </ul>)
+                                : (
+                                    <div>
+                                        {keySignatures.map(keySignature =>
+                                            <KeySignaturePanel keySignature={keySignature}/>
+                                        )}
+                                    </div>)
+                        )
                 }
             </div>
         );
