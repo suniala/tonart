@@ -1,11 +1,49 @@
 import * as React from 'react';
-import {Tone} from "./types";
-import Key from "./Key";
+import {Tone} from './types';
 
 interface Props {
     readOnly?: boolean
     tones: Set<Tone>
     onToneToggle?: (tone: Tone) => void
+}
+
+interface KeyProps {
+    tone: Tone
+    selected: Set<Tone>
+    x: number
+    onToneToggle: (tone: Tone) => void
+}
+
+class WhiteKey extends React.Component<KeyProps, {}> {
+    private onToneToggle = () => this.props.onToneToggle(this.props.tone);
+
+    render() {
+        return (
+            <rect
+                className={'key-white key-' + this.props.tone + (this.props.selected.has(this.props.tone) ? ' selected' : '')}
+                width='50'
+                height='100'
+                x={this.props.x}
+                y='0'
+                onClick={this.onToneToggle}/>
+        );
+    }
+}
+
+class BlackKey extends React.Component<KeyProps, {}> {
+    private onToneToggle = () => this.props.onToneToggle(this.props.tone);
+
+    render() {
+        return (
+            <rect
+                className={'key-black key-' + this.props.tone + (this.props.selected.has(this.props.tone) ? ' selected' : '')}
+                width='40'
+                height='60'
+                x={this.props.x}
+                y='0'
+                onClick={this.onToneToggle}/>
+        );
+    }
 }
 
 class Keyboard extends React.Component<Props, {}> {
@@ -18,23 +56,26 @@ class Keyboard extends React.Component<Props, {}> {
     render() {
         return (
             <div className='keyboard u-full-width'>
-                <div className='keys black'>
-                    <Key onClick={this.onToneToggle} selected={this.props.tones} tone={Tone.Cs}/>
-                    <Key onClick={this.onToneToggle} selected={this.props.tones} tone={Tone.Ds}/>
-                    <div className='filler'>&nbsp;</div>
-                    <Key onClick={this.onToneToggle} selected={this.props.tones} tone={Tone.Fs}/>
-                    <Key onClick={this.onToneToggle} selected={this.props.tones} tone={Tone.Gs}/>
-                    <Key onClick={this.onToneToggle} selected={this.props.tones} tone={Tone.As}/>
-                </div>
-                <div className='keys white'>
-                    <Key onClick={this.onToneToggle} selected={this.props.tones} tone={Tone.C}/>
-                    <Key onClick={this.onToneToggle} selected={this.props.tones} tone={Tone.D}/>
-                    <Key onClick={this.onToneToggle} selected={this.props.tones} tone={Tone.E}/>
-                    <Key onClick={this.onToneToggle} selected={this.props.tones} tone={Tone.F}/>
-                    <Key onClick={this.onToneToggle} selected={this.props.tones} tone={Tone.G}/>
-                    <Key onClick={this.onToneToggle} selected={this.props.tones} tone={Tone.A}/>
-                    <Key onClick={this.onToneToggle} selected={this.props.tones} tone={Tone.B}/>
-                </div>
+                <svg xmlns='http://www.w3.org/2000/svg' version='1.1'
+                     width='350mm'
+                     height='100mm'
+                     viewBox='0 0 350 100'
+                >
+                    <g>
+                        <WhiteKey tone={Tone.C} x={0} onToneToggle={this.onToneToggle} selected={this.props.tones}/>
+                        <WhiteKey tone={Tone.D} x={50} onToneToggle={this.onToneToggle} selected={this.props.tones}/>
+                        <WhiteKey tone={Tone.E} x={100} onToneToggle={this.onToneToggle} selected={this.props.tones}/>
+                        <WhiteKey tone={Tone.F} x={150} onToneToggle={this.onToneToggle} selected={this.props.tones}/>
+                        <WhiteKey tone={Tone.G} x={200} onToneToggle={this.onToneToggle} selected={this.props.tones}/>
+                        <WhiteKey tone={Tone.A} x={250} onToneToggle={this.onToneToggle} selected={this.props.tones}/>
+                        <WhiteKey tone={Tone.B} x={300} onToneToggle={this.onToneToggle} selected={this.props.tones}/>
+                        <BlackKey tone={Tone.Cs} x={30} onToneToggle={this.onToneToggle} selected={this.props.tones}/>
+                        <BlackKey tone={Tone.Ds} x={80} onToneToggle={this.onToneToggle} selected={this.props.tones}/>
+                        <BlackKey tone={Tone.Fs} x={180} onToneToggle={this.onToneToggle} selected={this.props.tones}/>
+                        <BlackKey tone={Tone.Gs} x={230} onToneToggle={this.onToneToggle} selected={this.props.tones}/>
+                        <BlackKey tone={Tone.As} x={280} onToneToggle={this.onToneToggle} selected={this.props.tones}/>
+                    </g>
+                </svg>
             </div>
         );
     }

@@ -8,44 +8,25 @@ h2 {
     margin-top: 1em;
 }
 
-.keys.black {
-    margin-left: 8%;
+.keyboard svg {
+    width: inherit;
+    height: inherit;
 }
 
-.keys.black button {
-    background-color: black;
-    border-color: black;
-    color: white;
+.keyboard .key-white {
+    stroke: black;
+    stroke-width: 1px;
+    fill: white;
 }
 
-.keys.black button.button-primary {
-    background-color: #33C3F0;
-    border-color: #33C3F0;
+.keyboard .key-black {
+    stroke: black;
+    stroke-width: 1px;
+    fill: black;
 }
 
-div.key {
-    display: inline-block;
-    margin-right: 4px;
-}
-
-.keys.black > .key {
-    width: 14%;
-}
-
-.filler {
-    display: inline-block;
-    width: 13%;
-    margin-right: 4px;
-}
-
-.keys.white > .key {
-    width: 13%;
-}
-
-.key > button {
-    padding-left: 0;
-    padding-right: 0;
-    width: 100%;
+.keyboard .selected {
+    fill: #ff001d;
 }
 
 .key-signature-panel {
