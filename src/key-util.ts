@@ -10,8 +10,10 @@ export interface Interval {
     semitones: number
 }
 
-const HALF: Interval = {semitones: 1};
-const FULL: Interval = {semitones: 2};
+const SEMITONE: Interval = {semitones: 1};
+const TONE: Interval = {semitones: 2};
+const MINOR_THIRD: Interval = {semitones: 3};
+const MAJOR_THIRD: Interval = {semitones: 4};
 
 interface Scale {
     name: string
@@ -21,12 +23,40 @@ interface Scale {
 const scales: Scale[] = [
     {
         name: 'Diatonic Major',
-        intervals: [FULL, FULL, HALF, FULL, FULL, FULL, HALF]
+        intervals: [TONE, TONE, SEMITONE, TONE, TONE, TONE, SEMITONE]
     },
     {
         name: 'Diatonic Minor',
-        intervals: [FULL, HALF, FULL, FULL, HALF, FULL, FULL]
-    }
+        intervals: [TONE, SEMITONE, TONE, TONE, SEMITONE, TONE, TONE]
+    },
+    {
+        name: 'Natural Minor',
+        intervals: [TONE, SEMITONE, TONE, TONE, SEMITONE, MINOR_THIRD, SEMITONE]
+    },
+    {
+        name: 'Melodic Minor Ascending',
+        intervals: [TONE, SEMITONE, TONE, TONE, TONE, TONE, SEMITONE]
+    },
+    {
+        name: 'Melodic Minor Descending',
+        intervals: [TONE, TONE, SEMITONE, TONE, TONE, SEMITONE, TONE]
+    },
+    {
+        name: 'Harmonic Minor',
+        intervals: [TONE, SEMITONE, TONE, TONE, SEMITONE, MINOR_THIRD, SEMITONE]
+    },
+    {
+        name: 'Whole Tone',
+        intervals: [TONE, TONE, TONE, TONE, TONE, TONE]
+    },
+    {
+        name: 'Pentatonic Major',
+        intervals: [TONE, TONE, MINOR_THIRD, TONE, TONE]
+    },
+    {
+        name: 'Pentatonic Minor',
+        intervals: [MINOR_THIRD, TONE, TONE, SEMITONE, MAJOR_THIRD]
+    },
 ];
 
 const toneLookup = ALL_TONES.concat(ALL_TONES);
@@ -63,6 +93,4 @@ const findKeySignatures = (tones: Set<Tone>): KeySignature[] => {
 
 export {
     findKeySignatures,
-    HALF,
-    FULL
 }
